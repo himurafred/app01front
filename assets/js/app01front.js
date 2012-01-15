@@ -28,7 +28,7 @@ $(function(){
 	}
 	
 	var fillMail = function(uuid) {
-		$("#send").find("a").attr("href", "mailto:?subject=Someone share a list with you&body= throw your idea here : http://127.0.0.1:9000/list/" + uuid);
+		$("#send").find("a").attr("href", "mailto:?subject=Someone share a list with you&body= throw your idea here : " + backend + "/list/" + uuid);
 	}
 	
 	var fillList = function(list) {
@@ -105,12 +105,6 @@ $(function(){
 		});
 	}
 	
-	
-	
-	
-	
-	
-	
 
 	$("#message").hide();
 	$("#message2").hide();
@@ -127,11 +121,6 @@ $(function(){
 			e.preventDefault();
 		}
 	});
-	
-	
-	
-	
-	
 	
 	var param = window.location.href.split("?");
 	if(param[1]) {
