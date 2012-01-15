@@ -2,8 +2,8 @@ var aList;
 
 $(function(){
 
-	//var backend = "http://applist01.slouis.cloudbees.net";
-	var backend = "http://localhost:9000";
+	var backend = "http://applist01.slouis.cloudbees.net";
+	//var backend = "http://localhost:9000";
 	
 	var getList = function(uuid) {
 		
