@@ -1,12 +1,14 @@
 var properties = {
 	
 	urls: {
-		/*showList: "http://applist01.slouis.cloudbees.net/list/",
+		showList: "http://applist01.slouis.cloudbees.net/list/",
 		addlist:  "http://applist01.slouis.cloudbees.net/list.json",
-		addItem:  "http://applist01.slouis.cloudbees.net/element/"*/
+		addItem:  "http://applist01.slouis.cloudbees.net/element/"
+		/*
 		showList: "http://localhost:9000/list/",
 		addlist:  "http://localhost:9000/list.json",
 		addItem:  "http://localhost:9000/element/"
+		*/
 	},
 	text: {
 		en: {
