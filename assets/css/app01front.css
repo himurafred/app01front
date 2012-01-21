@@ -117,10 +117,9 @@ input[type="submit"] {
 }
 
 footer {
-	position : fixed;
+	position : absolute;
 	bottom : 0;
 	width : 100%;
-	text-align: center;
 	background-color : black;
 	height : 20px;
 	line-height: 20px;
@@ -153,6 +152,7 @@ footer .blossom {
 }
 
 footer #dragUp {
+	overflow: hidden;
 	position : absolute;
 	bottom : 0;
 	left : 0;

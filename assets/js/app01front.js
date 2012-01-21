@@ -2,40 +2,40 @@ var aList;
 
 $(function(){
 
-	var backend = "http://applist01.slouis.cloudbees.net";
-	//var backend = "http://localhost:9000";
+	var errorManager = function(err) {
+		var messageElt = $("#message");
+		messageElt.find("p").html(properties.text[lang].errors[err]);
+		messageElt.fadeIn().delay(2000).fadeOut();
+	} 
 	
 	var getList = function(uuid) {
 		
-		$("h1").html("Loading...");
-		$("#listName").attr("disabled", "disabled").val("Loading...");
-		
+		$("h1").html(properties.text[lang].misc.load);
 		$.ajax({
-			url: backend + "/list/" + uuid + ".json",
+			url: properties.urls.showList + uuid + ".json",
 			dataType: "json",
 			type: "GET",
 			success: function(data) {
-				aList = data[0];
-				$("#listName").removeAttr("disabled");
+				aList = data;
 				$("#createList").submit(addItem);
 				fillMail(aList.uuid);
 				fillList(aList);
 			},
 			error: function(data) {
-				$("#message").fadeIn();
+				errorManager("listRetrieve");
 			}
 		});
 	}
 	
 	var fillMail = function(uuid) {
-		$("#send").find("a").attr("href", "mailto:?subject=Someone share a list with you&body= throw your idea here : " + backend + "/list/" + uuid);
+		$("#send").find("a").attr("href", "mailto:?subject=" + properties.text[lang].misc.mailSubject + "&body= "+ properties.text[lang].misc.mailSubject + properties.urls.showList + uuid);
 	}
 	
 	var fillList = function(list) {
 		$("h1").html(list.text);
 		var listNameInput = $("#listName");
 		listNameInput.val("");
-		listNameInput.attr("placeholder", "Throw your ideas");
+		listNameInput.attr("placeholder", properties.text[lang].misc.itemPlaceholder);
 		var ul = $("#items").hide();
 		$.each(list.elements, function(){
 			var li = $("<li>").html(this.text);
@@ -44,50 +44,44 @@ $(function(){
 		ul.slideDown("slow");
 	}
 	
-	var addList = function() {
-		$("#createList").submit(function(e){
-			e.preventDefault();
-			var listNameInput = $("#listName");
-			if(listNameInput.val() == "") {
-				$("#message2").fadeIn();
-				return;
-			}
-			$("#message").hide();
-			$("#message2").hide();
-			var _this = $(this);
-			$.ajax({
-				url: backend + "/list.json",
-				dataType: "json",
-				type: "POST",
-				data: {
-					text: listNameInput.val()
-				},
-				success: function(data) {
-					aList = data;
-					fillMail(aList.uuid);
-					$("h1").html(listNameInput.val());
-					listNameInput.val("");
-					listNameInput.attr("placeholder", "Throw your ideas");
-					_this.unbind().submit(addItem);
-				},
-				error: function(data) {
-					$("#message").fadeIn();
-				}
-			});
-		});
-	}
-		
-	var addItem = function(e){
+	var addList = function(e) {
 		e.preventDefault();
 		var listNameInput = $("#listName");
 		if(listNameInput.val() == "") {
-			$("#message2").fadeIn();
+			errorManager("empty");
 			return;
 		}
-		$("#message").hide();
-		$("#message2").hide();
+		var _this = $(this);
 		$.ajax({
-			url: backend + "/element/"+aList.uuid+"/"+listNameInput.val(),
+			url: properties.urls.addlist,
+			dataType: "json",
+			type: "POST",
+			data: {
+				text: listNameInput.val()
+			},
+			success: function(data) {
+				aList = data;
+				fillMail(aList.uuid);
+				$("h1").html(listNameInput.val());
+				listNameInput.val("");
+				listNameInput.attr("placeholder", properties.text[lang].misc.itemPlaceholder);
+				_this.unbind().submit(addItem);
+			},
+			error: function(data) {
+				errorManager("listSave");
+			}
+		});
+	}
+		
+	var addItem = function(e) {
+		e.preventDefault();
+		var listNameInput = $("#listName");
+		if(listNameInput.val() == "") {
+			errorManager("empty");
+			return;
+		}
+		$.ajax({
+			url: properties.urls.addItem + aList.uuid + "/" + listNameInput.val(),
 			dataType: "json",
 			type: "POST",
 			data: {
@@ -100,14 +94,11 @@ $(function(){
 				listNameInput.val("");
 			},
 			error: function(data) {
-				$("#message").fadeIn();
+				errorManager("itemSave");
 			}
 		});
 	}
 	
-
-	$("#message").hide();
-	$("#message2").hide();
 
 	$("a.close").click(function(e) {
 		$(this).parent().hide();
@@ -122,16 +113,43 @@ $(function(){
 		}
 	});
 	
+	$("#listName, #submit").ajaxSend(function() {
+		$(this).attr("disabled", "disabled");
+	});
+	
+	$("#listName, #submit").ajaxComplete(function() {
+		$(this).removeAttr("disabled");
+	});
+	
+	$("#message").ajaxSend(function() {
+		$(this).hide();
+	});
+	
+	// ****** INIT ******
+	
+	
+	$("#message").hide();
+	
+	//Get browser language for texts
+	var lang = "en";
+	if(navigator.language) {
+		lang = navigator.language.substring(0, 2);
+		if(!properties.text[lang]) {
+			lang = "en";
+		} 
+	}
+	
+	//Is there a uuid in the url ?
 	var param = window.location.href.split("?");
 	if(param[1]) {
 		var uuid = param[1].split("=");
 		if(uuid[1]) {
 			getList(uuid[1]);
 		} else {
-			addList();
+			$("#createList").submit(addList);
 		}
 	} else {
-		addList();
+		$("#createList").submit(addList);
 	}
 	
 });

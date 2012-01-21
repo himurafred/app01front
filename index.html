@@ -8,6 +8,7 @@
 		
 		<script src="assets/js/jquery/1.4/jquery.min.js" type="text/javascript"></script>
 		<script src="assets/js/app01front.js" type="text/javascript"></script>
+		<script src="assets/js/properties.js" type="text/javascript"></script>
 
 		<title>Get It</title>
 
@@ -21,11 +22,7 @@
 			<div id="msgBlock" class="centered">
 				<div id="message" class="alert-message error">
 				    <a class="close" href="#">×</a>
-				    <p><strong>Oops!</strong> ...</p>
-				</div>
-			    <div id="message2" class="alert-message error">
-				    <a class="close" href="#">×</a>
-				    <p>Please type something.</p>
+				    <p></p>
 				</div>&nbsp;
 			</div>
 			<div id="listBlock" class="centered">
@@ -34,7 +31,7 @@
 				
 				    <div class="row">
 				    	<input type="text" id="listName" placeholder="Got a list name ?" maxlength="30" />
-				    	<input type="submit" class="btn plus" value="+" />
+				    	<input id="submit" type="submit" class="btn plus" value="+" />
 				    </div>
 				    
 				</form>
@@ -60,6 +57,7 @@
 			</div>
 			<nav>
 				<ul>
+					<li><a href="#">language</a></li>
 					<li><a href="#">team</a></li>
 					<li><a href="#">feedback</a></li>
 				</ul>
