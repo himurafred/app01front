@@ -99,10 +99,21 @@ $(function(){
 		});
 	}
 	
+	
+	
+	// ****** BIND UI ******
 
+	
+	
+	$("#homeBtn").click(function(e) {
+		if(!confirm(properties.text[lang].misc.leave)) {
+			e.preventDefault();
+		}
+	});
+	
 	$("a.close").click(function(e) {
 		$(this).parent().hide();
-		e.preventDefault;
+		e.preventDefault();
 	});
 	
 	$("#send").click(function(e) {
@@ -124,6 +135,8 @@ $(function(){
 	$("#message").ajaxSend(function() {
 		$(this).hide();
 	});
+	
+	
 	
 	// ****** INIT ******
 	

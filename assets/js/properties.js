@@ -23,7 +23,8 @@ var properties = {
 				mailSubject: "Someone share a list with you",
 				mailBody: "Throw your idea here : ",
 				listPlaceholder: "Got a list name ?",
-				itemPlaceholder: "Throw your ideas"
+				itemPlaceholder: "Throw your ideas",
+				leave: "Are you sure ? \n You will loose the list if you have not send it. Leave the liste anyway ?"
 			}
 		},
 		fr: {
@@ -38,7 +39,8 @@ var properties = {
 				mailSubject: "Quelqu'un souhaite partager une liste avec vous.",
 				mailBody: "Partagez vous aussi vos idées ici : ",
 				listPlaceholder: "Vous avez un nom de liste ?",
-				itemPlaceholder: "Partagez vos idées"
+				itemPlaceholder: "Partagez vos idées",
+				leave: "Vous allez quitter cette liste. \n Vous la perdrez si vous ne l'avez pas envoyé . Quitter la page ?"
 			}
 		}
 	}

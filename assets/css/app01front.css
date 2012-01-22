@@ -1,22 +1,38 @@
 header {
-	position : fixed;
 	top : 0;
 	text-align: center;
 	height : 90px;
 	width : 100%;
 	color : black;
+	border-bottom : dashed 3px black;
+	background-color : white;
+	z-index : 10;
+	margin-bottom : 15px;
 }
 
 h1 {
 	font-size: 50px;
-	line-height: 50px;
+	line-height: 75px;
+	height : 75px;
+	margin : 0;
+}
+
+#homeBtn {
+	width : 65px;
+	height : 30px;
+	line-height : 30px;
+	margin-right : auto;
+	margin-left : auto;
+	border-radius : 20px;
+	background-color : black;
+}
+
+#homeBtn a {
+	color : white;
 }
 
 #main {
-	position : absolute;
 	width : 100%;
-	top : 90px;
-	bottom : 0;
 	padding-bottom : 25px;
 }
 
@@ -28,7 +44,8 @@ h1 {
 }
 
 #msgBlock {
-	height: 72px;
+	height : 70px;
+	padding-top : 20px;
 }
 
 #listBlock {
@@ -56,7 +73,9 @@ h1 {
 }
 
 #listName:focus {
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset, 0 0 8px rgba(0, 0, 0, 0.6);
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.6);
+  	-moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.6);
+ 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
 #listName:focus + .plus {
@@ -106,6 +125,7 @@ input[type="submit"] {
 	list-style: none;
 	margin : 0;
 	display: inline-block;
+	padding-bottom : 30px 
 }
 
 #items li {
@@ -117,12 +137,13 @@ input[type="submit"] {
 }
 
 footer {
-	position : absolute;
+	position : fixed;
+	padding-top : 0;
 	bottom : 0;
 	width : 100%;
 	background-color : black;
-	height : 20px;
-	line-height: 20px;
+	height : 30px;
+	line-height: 30px;
 }
 
 footer a {
